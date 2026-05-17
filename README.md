@@ -1,5 +1,10 @@
 # RemoteFileDialog
 
+![License](https://img.shields.io/github/license/zameerthakur/RemoteFileDialog)
+![NuGet](https://img.shields.io/nuget/v/RemoteFileDialog)
+![Downloads](https://img.shields.io/nuget/dt/RemoteFileDialog)
+
+
 Reusable WPF dialog for browsing and selecting files and folders from FTP and SFTP servers.
 
 ## NuGet Packages
