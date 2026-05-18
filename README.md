@@ -1,17 +1,11 @@
 # RemoteFileDialog
 
+![Build](https://github.com/zameerthakur/RemoteFileDialog/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/zameerthakur/RemoteFileDialog)
 ![NuGet](https://img.shields.io/nuget/v/RemoteFileDialog.Wpf)
 ![Downloads](https://img.shields.io/nuget/dt/RemoteFileDialog.Wpf)
 
-
-Reusable WPF dialog for browsing and selecting files and folders from FTP and SFTP servers.
-
-## NuGet Packages
-
-- [RemoteFileDialog.Wpf](https://www.nuget.org/packages/RemoteFileDialog.Wpf)
-- [RemoteFileDialog.Core](https://www.nuget.org/packages/RemoteFileDialog.Core)
-- [RemoteFileDialog.Infrastructure](https://www.nuget.org/packages/RemoteFileDialog.Infrastructure)
+Reusable WPF dialogs for browsing and selecting files and folders from FTP and SFTP servers.
 
 ## Overview
 
@@ -21,38 +15,52 @@ It is designed for desktop applications that need FTP or SFTP browsing without b
 
 ## Features
 
-- Browse FTP folders
-- Browse SFTP folders
-- Select a remote folder path
-- Select one or multiple remote files
-- Left-side remote folder tree
-- Right-side folder or file listing
-- Connection status indicator
-- Background connection monitoring
-- Reconnect support
+- FTP browsing support
+- SFTP browsing support
+- Remote folder selection dialog
+- Remote file selection dialog
+- Multi-file selection support
+- TreeView folder navigation
+- Connection monitoring
+- Reconnect handling
+- Loading indicators and status feedback
+- Header checkbox for select all / deselect all files
 - SFTP password authentication
 - SFTP private key authentication
-- SFTP password + private key authentication
-- Clean reusable architecture
+- SFTP password and private key authentication
+- Human-readable file size formatting
+- Standardized date formatting
+- Professional vector-based icons
+- Reusable MVVM-friendly architecture
 
-## Dialog Types
+## Packages
 
-### Remote Folder Dialog
+| Package | Description | NuGet |
+|---|---|---|
+| RemoteFileDialog.Wpf | Main WPF package containing remote folder and file selection dialogs. Recommended package for most applications. | https://www.nuget.org/packages/RemoteFileDialog.Wpf |
+| RemoteFileDialog.Core | Shared models, enums, interfaces, and helper classes used by RemoteFileDialog. | https://www.nuget.org/packages/RemoteFileDialog.Core |
+| RemoteFileDialog.Infrastructure | FTP and SFTP infrastructure implementation using FluentFTP and SSH.NET. | https://www.nuget.org/packages/RemoteFileDialog.Infrastructure |
 
-Used to browse and select a remote folder path.
+### Main Package
 
-### Remote File Dialog
+Install the main package:
 
-Used to browse and select one or more remote files.
+```powershell
+dotnet add package RemoteFileDialog.Wpf
+```
+
+The following packages are installed automatically as dependencies:
+
+- RemoteFileDialog.Core
+- RemoteFileDialog.Infrastructure
 
 ## Supported Protocols
 
 - FTP
+- FTPS
 - SFTP
 
 ## Target Framework
-
-Planned target:
 
 - .NET 8
 - WPF
@@ -80,8 +88,6 @@ if (dialog.ShowDialog() == true)
 }
 ```
 
----
-
 ### SFTP Folder Dialog (Password Authentication)
 
 ```csharp
@@ -102,8 +108,6 @@ if (dialog.ShowDialog() == true)
 }
 ```
 
----
-
 ### SFTP Folder Dialog (Private Key Authentication)
 
 ```csharp
@@ -113,7 +117,8 @@ var connection = new RemoteConnectionOptions
     Host = "sftp.example.com",
     Port = 22,
     Username = "username",
-    PrivateKeyFilePath = @"C:\Keys\privatekey.ppk",
+    SftpAuthType = SftpAuthType.PrivateKey,
+    PrivateKeyPath = @"C:\Keys\private-key.ppk",
     PrivateKeyPassphrase = "optional-passphrase"
 };
 
@@ -124,8 +129,6 @@ if (dialog.ShowDialog() == true)
     var selectedFolder = dialog.SelectedFolderPath;
 }
 ```
-
----
 
 ### Remote File Dialog (Multi-Select)
 
@@ -162,9 +165,27 @@ if (dialog.ShowDialog() == true)
 
 ![Remote File Dialog](assets/screenshots/file-dialog.png)
 
+## Documentation
+
+- [Getting Started](docs/getting-started.md)
+- [Authentication](docs/authentication.md)
+- [Folder Dialog](docs/folder-dialog.md)
+- [File Dialog](docs/file-dialog.md)
+- [Architecture](docs/architecture.md)
+- [Troubleshooting](docs/troubleshooting.md)
+
+## Project Structure
+
+```text
+RemoteFileDialog.Core
+RemoteFileDialog.Infrastructure
+RemoteFileDialog.Wpf
+RemoteFileDialog.SampleApp
+```
+
 ## 🚧 Project Status
 
-This project is currently in active development, and the core FTP/SFTP browsing functionality is implemented and usable.
+This project is actively maintained, and the core FTP/SFTP browsing functionality is implemented and usable.
 
 ### ✅ Completed
 
@@ -186,10 +207,10 @@ This project is currently in active development, and the core FTP/SFTP browsing 
 - Human-readable file size formatting
 - Documentation and usage examples
 - Sample WPF application for testing
+- NuGet package publishing
 
 ### 🔜 Planned
 
-- NuGet package release
 - Advanced filtering and sorting
 - Dark mode support
 - Search support
@@ -199,10 +220,6 @@ This project is currently in active development, and the core FTP/SFTP browsing 
 - Additional UI/UX polish
 - TreeView lazy loading improvements
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Third-Party Libraries
 
 This project uses the following open-source libraries:
@@ -210,3 +227,7 @@ This project uses the following open-source libraries:
 - FluentFTP (MIT License)
 - SSH.NET (MIT License)
 - CommunityToolkit.Mvvm (MIT License)
+
+## License
+
+This project is licensed under the MIT License.
